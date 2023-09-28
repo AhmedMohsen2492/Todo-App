@@ -3,11 +3,16 @@ import 'package:todo_route/ui/utils/app_colors.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: AppColors.accent,
     primaryColor: AppColors.primary,
     appBarTheme: const AppBarTheme(
       elevation: 0,
       backgroundColor: AppColors.primary,
       titleTextStyle: AppTheme.appBarTextStyle,
+    ),
+    dividerTheme: DividerThemeData(
+      color: AppColors.primary,
+      thickness: 4,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(size: 32),
@@ -16,6 +21,14 @@ abstract class AppTheme {
       showUnselectedLabels: false,
       selectedItemColor: AppColors.primary,
       unselectedItemColor: AppColors.lightGrey,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      shape: StadiumBorder(
+          side: BorderSide(
+              color: AppColors.white,
+              width: 4
+          )
+      ),
     ),
   );
 
@@ -43,5 +56,11 @@ abstract class AppTheme {
     fontSize: 18,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
+  );
+
+  static const TextStyle bottomSheetDateTitleTextStyle = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+    color: AppColors.lightBlack,
   );
 }
