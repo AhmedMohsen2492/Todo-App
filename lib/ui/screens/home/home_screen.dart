@@ -32,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
       "To Do List",
       style: AppTheme.appBarTextStyle,
     ),
-    toolbarHeight: MediaQuery.of(context).size.height * .1,
   );
 
   Widget buildBottomNavigation() => BottomAppBar(
@@ -65,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildFab() => FloatingActionButton(
     onPressed: () {
       showModalBottomSheet(
-        isScrollControlled: true,
+          isScrollControlled: true,
           context: context,
           builder: (_) => Padding(
             padding: MediaQuery.of(context).viewInsets,

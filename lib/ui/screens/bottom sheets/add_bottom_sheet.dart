@@ -3,8 +3,17 @@ import '../../common/my_text_form_field.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_theme.dart';
 
-class AddBottomSheet extends StatelessWidget {
-  const AddBottomSheet({Key? key}) : super(key: key);
+class AddBottomSheet extends StatefulWidget {
+
+  @override
+  State<AddBottomSheet> createState() => _AddBottomSheetState();
+}
+
+class _AddBottomSheetState extends State<AddBottomSheet> {
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController desController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +31,32 @@ class AddBottomSheet extends StatelessWidget {
           ),
           MyTextFormField(
             hintText: "Enter task title",
+            controller: titleController,
           ),
           MyTextFormField(
             hintText: "Enter task description",
+            controller: desController,
           ),
           Text(
             "Select Date",
             style: AppTheme.bottomSheetDateTitleTextStyle,
           ),
-          Text(
-            "24/9/2023",
-            textAlign: TextAlign.center,
-            style: AppTheme.bottomSheetDateTitleTextStyle.copyWith(
-              fontSize: 18
+          InkWell(
+            onTap: (){
+              showMyDatePicker();
+            },
+            child: Text(
+              "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
+              textAlign: TextAlign.center,
+              style: AppTheme.bottomSheetDateTitleTextStyle.copyWith(
+                fontSize: 18
+              ),
             ),
           ),
           ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                addTodoFireStore();
+              },
               child: Text(
                 "Add",
               )
@@ -47,4 +65,21 @@ class AddBottomSheet extends StatelessWidget {
       ),
     );
   }
+
+  void addTodoFireStore() {
+    print(titleController);
+    print(desController);
+    print(selectedDate);
+  }
+
+  void showMyDatePicker() async{
+    selectedDate = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+    ) ?? selectedDate ;
+    setState(() {});
+  }
+
 }

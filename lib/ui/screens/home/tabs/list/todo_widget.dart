@@ -3,8 +3,14 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_route/ui/utils/app_colors.dart';
 import 'package:todo_route/ui/utils/app_theme.dart';
 
-class TodoWidget extends StatelessWidget {
+class TodoWidget extends StatefulWidget {
   const TodoWidget({Key? key}) : super(key: key);
+
+  @override
+  State<TodoWidget> createState() => _TodoWidgetState();
+}
+
+class _TodoWidgetState extends State<TodoWidget> {
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +18,7 @@ class TodoWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppColors.white, borderRadius: BorderRadius.circular(15)
       ),
-      margin: EdgeInsets.symmetric(
-        vertical: 15,
-        horizontal: 25,
-      ),
+      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 25,),
       child: Slidable(
         startActionPane: ActionPane(
           extentRatio: .3,
@@ -37,10 +40,7 @@ class TodoWidget extends StatelessWidget {
             color: AppColors.white,
             borderRadius: BorderRadius.circular(15),
           ),
-          padding: EdgeInsets.symmetric(
-            vertical: 25,
-            horizontal: 16,
-          ),
+          padding: EdgeInsets.symmetric(vertical: 25, horizontal: 16,),
           height: MediaQuery.of(context).size.height * 0.13,
           child: Row(
             children: [

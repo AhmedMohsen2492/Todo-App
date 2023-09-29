@@ -13,47 +13,51 @@ class ListTab extends StatefulWidget {
 class _ListTabState extends State<ListTab> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 18,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Expanded(
-                      flex: 35,
-                      child: Container(color: AppColors.primary,)
-                  ),
-                  Expanded(
-                    flex: 65,
-                      child: Container(color: AppColors.accent,)
-                  ),
-                ],
-              ),
-              CalendarTimeline(
-                onDateSelected: (date) => print(date),
-                initialDate: DateTime.now(),
-                firstDate: DateTime.now().subtract(Duration(days: 365)),
-                lastDate: DateTime.now().add(Duration(days: 365)),
-                leftMargin: 20,
-                monthColor: AppColors.black,
-                dayColor: AppColors.black,
-                activeDayColor: AppColors.primary,
-                activeBackgroundDayColor: Colors.white,
-                dotsColor: AppColors.transparent,
-              ),
-            ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.13,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Expanded(
+                        flex: 38,
+                        child: Container(
+                          color: AppColors.primary,
+                        )),
+                    Expanded(
+                        flex: 62,
+                        child: Container(
+                          color: AppColors.accent,
+                        )),
+                  ],
+                ),
+                CalendarTimeline(
+                  onDateSelected: (date) => print(date),
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now().subtract(Duration(days: 365)),
+                  lastDate: DateTime.now().add(Duration(days: 365)),
+                  leftMargin: 5,
+                  monthColor: AppColors.black,
+                  dayColor: AppColors.black,
+                  activeDayColor: AppColors.primary,
+                  activeBackgroundDayColor: Colors.white,
+                  dotsColor: AppColors.transparent,
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          flex: 82,
-          child: ListView.builder(
-            itemCount: 15,
-            itemBuilder: (context, index) => TodoWidget(),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.87,
+            child: ListView.builder(
+              itemCount: 150,
+              itemBuilder: (context, index) => TodoWidget(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

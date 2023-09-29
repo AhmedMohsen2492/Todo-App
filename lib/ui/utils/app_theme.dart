@@ -40,6 +40,12 @@ abstract class AppTheme {
     color: AppColors.white,
   );
 
+  static const TextStyle settingsTextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+    color: AppColors.black,
+  );
+
   static const TextStyle taskTitleTextStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,
