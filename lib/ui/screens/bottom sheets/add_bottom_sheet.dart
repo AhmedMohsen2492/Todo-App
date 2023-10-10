@@ -1,4 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_route/models/todo_dm.dart';
+import 'package:todo_route/ui/providers/list_provider.dart';
+import 'package:todo_route/ui/screens/home/tabs/list/list_tab.dart';
 import '../../common/my_text_form_field.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_theme.dart';
@@ -10,13 +16,14 @@ class AddBottomSheet extends StatefulWidget {
 }
 
 class _AddBottomSheetState extends State<AddBottomSheet> {
-
+  late ListProvider provider ;
   TextEditingController titleController = TextEditingController();
   TextEditingController desController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12 , vertical: 10),
       height: MediaQuery.of(context).size.height * 0.5,
@@ -46,7 +53,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               showMyDatePicker();
             },
             child: Text(
-              "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
+              "${provider.selectedDate.day}/${provider.selectedDate.month}/${provider.selectedDate.year}",
               textAlign: TextAlign.center,
               style: AppTheme.bottomSheetDateTitleTextStyle.copyWith(
                 fontSize: 18
@@ -67,9 +74,19 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
   }
 
   void addTodoFireStore() {
-    print(titleController);
-    print(desController);
-    print(selectedDate);
+    CollectionReference todoCollectionReference = FirebaseFirestore.instance.collection(TodoDM.collectionName);
+    DocumentReference newEmptyDoc = todoCollectionReference.doc();
+    newEmptyDoc.set({
+      "id" : newEmptyDoc.id,
+      "title" : titleController.text,
+      "description" : desController.text,
+      "date" : selectedDate,
+      "isDone" : false,
+    }).timeout(Duration(milliseconds: 300),
+      onTimeout: () {
+        Navigator.pop(context);
+        provider.refreshTodoList();
+      });
   }
 
   void showMyDatePicker() async{
@@ -81,5 +98,4 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
     ) ?? selectedDate ;
     setState(() {});
   }
-
 }

@@ -1,18 +1,33 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_route/models/todo_dm.dart';
+import 'package:todo_route/ui/providers/list_provider.dart';
 import 'package:todo_route/ui/screens/home/tabs/list/todo_widget.dart';
 import 'package:todo_route/ui/utils/app_colors.dart';
 
 class ListTab extends StatefulWidget {
-  const ListTab({Key? key}) : super(key: key);
 
   @override
   State<ListTab> createState() => _ListTabState();
 }
 
 class _ListTabState extends State<ListTab> {
+  late ListProvider provider ;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      provider.refreshTodoList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context);
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -35,8 +50,11 @@ class _ListTabState extends State<ListTab> {
                   ],
                 ),
                 CalendarTimeline(
-                  onDateSelected: (date) => print(date),
-                  initialDate: DateTime.now(),
+                  onDateSelected: (date){
+                    provider.refreshTodoList();
+                    provider.selectedDate = date ;
+                  },
+                  initialDate: provider.selectedDate,
                   firstDate: DateTime.now().subtract(Duration(days: 365)),
                   lastDate: DateTime.now().add(Duration(days: 365)),
                   leftMargin: 5,
@@ -50,14 +68,16 @@ class _ListTabState extends State<ListTab> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.87,
+            height: MediaQuery.of(context).size.height * 0.64,
             child: ListView.builder(
-              itemCount: 150,
-              itemBuilder: (context, index) => TodoWidget(),
+              itemCount: provider.todos.length,
+              itemBuilder: (context, index) => TodoWidget(model: provider.todos[index]),
             ),
           ),
         ],
       ),
     );
   }
+
+
 }
