@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:todo_route/ui/screens/bottom%20sheets/add_bottom_sheet.dart';
 import 'package:todo_route/ui/screens/home/tabs/list/list_tab.dart';
 import 'package:todo_route/ui/screens/home/tabs/settings/settings_tab.dart';
-import 'package:todo_route/ui/utils/app_colors.dart';
 import 'package:todo_route/ui/utils/app_theme.dart';
 
 class HomeScreen extends StatefulWidget {

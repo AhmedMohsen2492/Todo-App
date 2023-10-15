@@ -30,3 +30,11 @@ class TodoDM {
     };
   }
 }
+
+class TodoArgument{
+  String id ;
+  String title ;
+  String description ;
+
+  TodoArgument(this.id, this.title, this.description );
+}

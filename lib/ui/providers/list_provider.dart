@@ -1,25 +1,66 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:todo_route/models/todo_dm.dart';
+import 'package:todo_route/ui/screens/home/home_screen.dart';
 
 class ListProvider extends ChangeNotifier {
 
   List<TodoDM> todos = [] ;
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime.now() ;
+   TextEditingController titleController = TextEditingController();
+   TextEditingController desController = TextEditingController();
+
+  void deleteTodo(String id){
+    CollectionReference collectionReference =
+    FirebaseFirestore.instance.collection(TodoDM.collectionName);
+
+    collectionReference.doc(id)
+        .delete()
+        .then((value) => print("todo deleted"))
+        .catchError((e)=>print("error"));
+
+    todos.removeWhere((element) => element.id==id);
+    notifyListeners();
+  }
+
+  void updateTodo(BuildContext context,String id , String title , String des , Timestamp timestamp){
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection(TodoDM.collectionName);
+    collectionReference.doc(id).update({
+      "title" : title ,
+      "description" : des ,
+      "date" : timestamp ,
+    }).then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"))
+    .timeout(Duration(milliseconds: 300),
+    onTimeout: () {
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      },
+    );
+
+    todos.map((e) {
+      if(e.id==id){
+        e.title = title;
+        e.description = des ;
+        e.date = timestamp.toDate() ;
+      }
+    });
+
+    notifyListeners();
+  }
 
   void refreshTodoList() async{
     todos.clear();
-    CollectionReference<TodoDM> todosCollection =  FirebaseFirestore.instance.collection(TodoDM.collectionName).
+    CollectionReference<TodoDM> todosCollection =
+    FirebaseFirestore.instance.collection(TodoDM.collectionName).
     withConverter<TodoDM>(
-      fromFirestore: (snapshot, options) {
+      fromFirestore: (snapshot, _) {
         Map json = snapshot.data() as Map ;
         TodoDM todo = TodoDM.fromJson(json);
         return todo;
-      } ,
-      toFirestore: (value, options) {
-        return value.toJson();
-      },
-    );
+        } ,
+      toFirestore: (value, _) => value.toJson(),);
+
     QuerySnapshot<TodoDM> todosSnapShot = await todosCollection.
     orderBy("date").get();
 
@@ -34,10 +75,12 @@ class ListProvider extends ChangeNotifier {
           todo.date.year != selectedDate.year){
         return false;
       }
-      else {
+      else
+      {
           return true ;
       }
     }).toList();
     notifyListeners();
   }
+
 }

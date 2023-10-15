@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_route/ui/providers/list_provider.dart';
+import 'package:todo_route/ui/screens/edit/edit_screen.dart';
 import 'package:todo_route/ui/screens/home/home_screen.dart';
 import 'package:todo_route/ui/screens/splash/splash_screen.dart';
 import 'package:todo_route/ui/utils/app_theme.dart';
@@ -11,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseFirestore.instance.settings =
-      Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
+      const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
   await FirebaseFirestore.instance.disableNetwork();
   runApp(ChangeNotifierProvider(
       create: (_) {
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.routeName,
       routes: {
         HomeScreen.routeName: (_) => HomeScreen(),
-        SplashScreen.routeName: (_) => SplashScreen(),
+        SplashScreen.routeName: (_) => const SplashScreen(),
+        EditScreen.routeName : (_) => EditScreen()
       },
     );
   }

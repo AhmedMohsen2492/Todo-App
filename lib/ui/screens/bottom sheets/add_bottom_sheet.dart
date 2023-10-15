@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_route/models/todo_dm.dart';
 import 'package:todo_route/ui/providers/list_provider.dart';
-import 'package:todo_route/ui/screens/home/tabs/list/list_tab.dart';
 import '../../common/my_text_form_field.dart';
-import '../../utils/app_colors.dart';
 import '../../utils/app_theme.dart';
 
 class AddBottomSheet extends StatefulWidget {
@@ -17,13 +14,15 @@ class AddBottomSheet extends StatefulWidget {
 
 class _AddBottomSheetState extends State<AddBottomSheet> {
   late ListProvider provider ;
-  TextEditingController titleController = TextEditingController();
-  TextEditingController desController = TextEditingController();
-  DateTime selectedDate = DateTime.now();
+  late TextEditingController titleController;
+  late TextEditingController desController ;
 
   @override
   Widget build(BuildContext context) {
     provider = Provider.of(context);
+    titleController = TextEditingController();
+    desController = TextEditingController();
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12 , vertical: 10),
       height: MediaQuery.of(context).size.height * 0.5,
@@ -74,13 +73,15 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
   }
 
   void addTodoFireStore() {
-    CollectionReference todoCollectionReference = FirebaseFirestore.instance.collection(TodoDM.collectionName);
+    CollectionReference todoCollectionReference =
+    FirebaseFirestore.instance.collection(TodoDM.collectionName);
+
     DocumentReference newEmptyDoc = todoCollectionReference.doc();
     newEmptyDoc.set({
       "id" : newEmptyDoc.id,
       "title" : titleController.text,
       "description" : desController.text,
-      "date" : selectedDate,
+      "date" : provider.selectedDate,
       "isDone" : false,
     }).timeout(Duration(milliseconds: 300),
       onTimeout: () {
@@ -90,12 +91,12 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
   }
 
   void showMyDatePicker() async{
-    selectedDate = await showDatePicker(
+    provider.selectedDate = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: provider.selectedDate,
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(Duration(days: 365)),
-    ) ?? selectedDate ;
+    ) ?? provider.selectedDate ;
     setState(() {});
   }
 }

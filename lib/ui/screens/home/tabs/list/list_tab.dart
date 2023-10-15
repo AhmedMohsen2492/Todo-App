@@ -1,8 +1,6 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_route/models/todo_dm.dart';
 import 'package:todo_route/ui/providers/list_provider.dart';
 import 'package:todo_route/ui/screens/home/tabs/list/todo_widget.dart';
 import 'package:todo_route/ui/utils/app_colors.dart';
