@@ -17,7 +17,9 @@ The Todo Application is a mobile application built using Flutter that allows use
 - provider (state management)
 
 ## Screenshots
-<img src="screenshots/splashScreen.png" width="200" height="400" />  <img src="screenshots/bottomsheet%20.png" width="200" height="400" /> <img src="screenshots/home1.png" width="200" height="400" /> <img src="screenshots/home2.png" width="200" height="400" />  <img src="screenshots/edit.png" width="200" height="400" />  <img src="screenshots/edit.png" width="200" height="400" />
+<img src="screenshots/splashScreen.png" width="200" height="400" />  <img src="screenshots/bottomsheet%20.png" width="200" height="400" />  <img src="screenshots/home1.png" width="200" height="400" /> 
+
+<img src="screenshots/home2.png" width="200" height="400" />  <img src="screenshots/edit.png" width="200" height="400" />  <img src="screenshots/setting.png" width="200" height="400" />
 
 ## Installation
 1. Install the Flutter SDK
