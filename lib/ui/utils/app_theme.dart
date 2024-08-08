@@ -10,7 +10,7 @@ abstract class AppTheme {
       backgroundColor: AppColors.primary,
       titleTextStyle: AppTheme.appBarTextStyle,
     ),
-    dividerTheme: DividerThemeData(
+    dividerTheme: const DividerThemeData(
       color: AppColors.primary,
       thickness: 4,
     ),
@@ -22,13 +22,8 @@ abstract class AppTheme {
       selectedItemColor: AppColors.primary,
       unselectedItemColor: AppColors.lightGrey,
     ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      shape: StadiumBorder(
-          side: BorderSide(
-              color: AppColors.white,
-              width: 4
-          )
-      ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      shape: StadiumBorder(side: BorderSide(color: AppColors.white, width: 4)),
     ),
   );
 

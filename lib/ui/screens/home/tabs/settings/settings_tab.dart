@@ -3,14 +3,14 @@ import 'package:todo_route/ui/utils/app_theme.dart';
 import '../../../../utils/app_colors.dart';
 
 class SettingsTab extends StatefulWidget {
-  const SettingsTab({Key? key}) : super(key: key);
+  const SettingsTab({super.key});
 
   @override
   State<SettingsTab> createState() => _SettingsTabState();
 }
 
 class _SettingsTabState extends State<SettingsTab> {
-  List<String> LanguagesList = ["English", "اللغة العربية"];
+  List<String> languagesList = ["English", "اللغة العربية"];
   String language = 'English';
   String mode = 'light';
 
@@ -27,11 +27,11 @@ class _SettingsTabState extends State<SettingsTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
+              const Text(
                 "Language",
                 style: AppTheme.settingsTextStyle,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               DropdownButtonFormField(
@@ -41,7 +41,7 @@ class _SettingsTabState extends State<SettingsTab> {
                     value: value,
                     child: Text(
                       value,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.primary,
                       ),
                     ),
@@ -52,8 +52,8 @@ class _SettingsTabState extends State<SettingsTab> {
                   setState(() {});
                 },
                 value: language,
-                hint: Text("select app language"),
-                decoration: InputDecoration(
+                hint: const Text("select app language"),
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(10),
                   fillColor: AppColors.white,
                   filled: true,
@@ -71,14 +71,14 @@ class _SettingsTabState extends State<SettingsTab> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "Mode",
                 style: AppTheme.settingsTextStyle,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               DropdownButtonFormField(
@@ -88,7 +88,7 @@ class _SettingsTabState extends State<SettingsTab> {
                     value: value,
                     child: Text(
                       value,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.primary,
                       ),
                     ),
@@ -99,8 +99,8 @@ class _SettingsTabState extends State<SettingsTab> {
                   setState(() {});
                 },
                 value: mode,
-                hint: Text("select app language"),
-                decoration: InputDecoration(
+                hint: const Text("select app language"),
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(10),
                   fillColor: AppColors.white,
                   filled: true,

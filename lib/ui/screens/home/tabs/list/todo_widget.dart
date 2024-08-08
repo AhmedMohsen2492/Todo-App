@@ -17,38 +17,36 @@ class TodoWidget extends StatefulWidget {
 }
 
 class _TodoWidgetState extends State<TodoWidget> {
-
   @override
   Widget build(BuildContext context) {
     ListProvider provider = Provider.of(context);
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.pushNamed(context, EditScreen.routeName,
-        arguments: TodoArgument(
-            widget.model.id,
-            widget.model.title,
-            widget.model.description,
-        )
-        );
+            arguments: TodoArgument(
+              widget.model.id,
+              widget.model.title,
+              widget.model.description,
+            ));
       },
       child: Container(
         decoration: BoxDecoration(
             color: AppColors.white, borderRadius: BorderRadius.circular(15)),
-        margin: EdgeInsets.symmetric(
-          vertical: 15,
-          horizontal: 25,
+        margin: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20,
         ),
         child: Slidable(
           closeOnScroll: true,
           startActionPane: ActionPane(
             extentRatio: .3,
-            motion: DrawerMotion(),
+            motion: const DrawerMotion(),
             children: [
               SlidableAction(
                 onPressed: (_) {
                   provider.deleteTodo(widget.model.id);
                 },
-                backgroundColor: Color(0xFFEC4B4B),
+                backgroundColor: const Color(0xFFEC4B4B),
                 foregroundColor: AppColors.white,
                 icon: Icons.delete,
                 label: 'delete',
@@ -62,17 +60,18 @@ class _TodoWidgetState extends State<TodoWidget> {
               color: AppColors.white,
               borderRadius: BorderRadius.circular(15),
             ),
-            padding: EdgeInsets.symmetric(
-              vertical: 25,
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
               horizontal: 16,
             ),
             height: MediaQuery.of(context).size.height * 0.13,
             child: Row(
               children: [
                 VerticalDivider(
-                  color: widget.model.isDone ? AppColors.green : AppColors.primary,
+                  color:
+                      widget.model.isDone ? AppColors.green : AppColors.primary,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 12,
                 ),
                 Expanded(
@@ -81,53 +80,54 @@ class _TodoWidgetState extends State<TodoWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "${widget.model.title}",
+                        widget.model.title,
                         style: AppTheme.taskTitleTextStyle.copyWith(
-                          color: widget.model.isDone ? AppColors.green : AppColors.primary,
+                          color: widget.model.isDone
+                              ? AppColors.green
+                              : AppColors.primary,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
-                        "${widget.model.description}",
+                        widget.model.description,
                         style: AppTheme.taskDescriptionTextStyle,
                       ),
                     ],
                   ),
                 ),
-                widget.model.isDone ?
-                InkWell(
-                  child: TextButton(
-                      onPressed: (){
-                        changeState();
-                      }
-                      , child: Text(
-                    "Done!",
-                    style: TextStyle(
-                        color: AppColors.green,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22
-                    ),
-                  )
-                  ),
-                ) :
-                InkWell(
-                  onTap: (){
-                    changeState();
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      Icons.check,
-                      color: AppColors.white,
-                    ),
-                  ),
-                ),
+                widget.model.isDone
+                    ? InkWell(
+                        child: TextButton(
+                            onPressed: () {
+                              changeState();
+                            },
+                            child: const Text(
+                              "Done!",
+                              style: TextStyle(
+                                  color: AppColors.green,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22),
+                            )),
+                      )
+                    : InkWell(
+                        onTap: () {
+                          changeState();
+                        },
+                        child: Container(
+                          padding:
+                              const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(
+                            Icons.check,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
@@ -136,8 +136,8 @@ class _TodoWidgetState extends State<TodoWidget> {
     );
   }
 
-  changeState(){
-    widget.model.isDone = ! widget.model.isDone ;
+  changeState() {
+    widget.model.isDone = !widget.model.isDone;
     setState(() {});
   }
 }

@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      initialRoute: HomeScreen.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: {
-        HomeScreen.routeName: (_) => HomeScreen(),
+        HomeScreen.routeName: (_) => const HomeScreen(),
         SplashScreen.routeName: (_) => const SplashScreen(),
-        EditScreen.routeName : (_) => EditScreen()
+        EditScreen.routeName: (_) => const EditScreen()
       },
     );
   }

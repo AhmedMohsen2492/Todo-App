@@ -12,14 +12,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_slidable: ^3.0.0
   calendar_timeline: ^1.1.2
-  firebase_core: ^2.17.0
-  cloud_firestore: ^4.9.3
+  firebase_core: ^3.3.0
+  cloud_firestore: ^5.2.1
   provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true

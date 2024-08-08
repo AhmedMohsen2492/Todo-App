@@ -3,7 +3,7 @@ import 'package:todo_route/ui/screens/home/home_screen.dart';
 import 'package:todo_route/ui/utils/app_assets.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
   static const String routeName = "SplashScreen";
 
   @override
