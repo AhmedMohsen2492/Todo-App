@@ -1,4 +1,4 @@
-# Todo
+# Todo App
 
 ## Description
 The Todo Application is a mobile application built using Flutter that allows users to manage their daily tasks. Users can add, delete, and edit tasks, and the application stores the tasks in a Firebase database.
