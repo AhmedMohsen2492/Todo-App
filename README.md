@@ -30,7 +30,7 @@ The Todo Application is a mobile application built using Flutter that allows use
 6. Run the app using flutter run
 
 ## Contributing
-If you'd like to contribute to the BMI Calculator project, please follow these guidelines:
+If you'd like to contribute to the Todo App project, please follow these guidelines:
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
 3. Make your changes and ensure the code passes all tests.
